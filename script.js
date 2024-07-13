@@ -1,6 +1,4 @@
-'use strict';
-
-
+"use strict";
 
 /**
  * add event on element
@@ -14,9 +12,7 @@ const addEventOnElem = function (elem, type, callback) {
   } else {
     elem.addEventListener(type, callback);
   }
-}
-
-
+};
 
 /**
  * navbar toggle
@@ -30,18 +26,16 @@ const overlay = document.querySelector("[data-overlay]");
 const toggleNavbar = function () {
   navbar.classList.toggle("active");
   overlay.classList.toggle("active");
-}
+};
 
 addEventOnElem(navTogglers, "click", toggleNavbar);
 
 const closeNavbar = function () {
   navbar.classList.remove("active");
   overlay.classList.remove("active");
-}
+};
 
 addEventOnElem(navbarLinks, "click", closeNavbar);
-
-
 
 /**
  * header sticky & back top btn active
@@ -58,7 +52,7 @@ const headerActive = function () {
     header.classList.remove("active");
     backTopBtn.classList.remove("active");
   }
-}
+};
 
 addEventOnElem(window, "scroll", headerActive);
 
@@ -72,12 +66,11 @@ const headerSticky = function () {
   }
 
   lastScrolledPos = window.scrollY;
-}
+};
 
 addEventOnElem(window, "scroll", headerSticky);
 
 // p1
-
 
 /**
  * scroll reveal effect
@@ -91,8 +84,61 @@ const scrollReveal = function () {
       sections[i].classList.add("active");
     }
   }
-}
+};
 
 scrollReveal();
 
 addEventOnElem(window, "scroll", scrollReveal);
+
+/**
+ * bubble animation
+ */
+
+document.addEventListener("click", createBubble);
+
+function createBubble(event) {
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+
+  // Set initial position of bubble at event coordinates
+  const pageX = event.pageX;
+  const pageY = event.pageY;
+
+  bubble.style.left = pageX - 100 + "px"; // Adjust to center the bubble on click
+  bubble.style.top = pageY - 100 + "px"; // Adjust to center the bubble on click
+
+  // Add span elements as per the design
+  for (let i = 0; i < 5; i++) {
+    const span = document.createElement("span");
+    bubble.appendChild(span);
+  }
+
+  document.body.appendChild(bubble);
+
+  // Generate mostly upward movement for the bubble
+  const endX = pageX + (Math.random() * 100 - 50); // Random horizontal displacement
+  const endY = pageY - Math.random() * window.innerHeight; // Mostly upward
+
+  const duration = Math.random() * 5000 + 2000; // Random duration between 2 to 7 seconds
+
+  const startTime = performance.now();
+
+  function animateBubble(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const x = pageX + (endX - pageX) * progress;
+    const y = pageY + (endY - pageY) * progress;
+
+    bubble.style.left = x - 100 + "px"; // Adjust to center the bubble
+    bubble.style.top = y - 100 + "px"; // Adjust to center the bubble
+
+    if (progress < 1) {
+      requestAnimationFrame(animateBubble);
+    } else {
+      bubble.remove(); // Remove bubble after it completes its flight
+    }
+  }
+
+  requestAnimationFrame(animateBubble);
+}
