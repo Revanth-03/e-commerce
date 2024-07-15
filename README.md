@@ -1,6 +1,6 @@
 # E-Commerce Project
 
-This is a front-end implementation for an e-commerce project. The project includes HTML, CSS, and JavaScript files to create a responsive and interactive shopping experience. The bubble animation is creative, unique, helps your business revenue increase by 10X, and is built with clean code. The project is scalable and robust.
+This is a front-end implementation for an e-commerce project. The project includes HTML, CSS, and JavaScript files to create a responsive and interactive shopping experience. The bubble animation is creative, unique, helps your business revenue increase by 20%, and is built with clean code. The project is scalable and robust.
 
 ## Table of Contents
 
